@@ -45,7 +45,8 @@
     "react native project example",
     "application generator",
     "ui example",
-    "application template generator"
+    "application template generator",
+    "open template hub"
   ],
   "git repository": "https://github.com/open-template-hub/app-generator",
   "repository": {
