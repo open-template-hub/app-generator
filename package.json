@@ -46,7 +46,11 @@
     "application generator",
     "ui example",
     "application template generator",
-    "open template hub"
+    "open template hub",
+    "angular web",
+    "react native mobile",
+    "angular web application",
+    "react native mobile application"
   ],
   "git repository": "https://github.com/open-template-hub/app-generator",
   "repository": {
