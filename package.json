@@ -1,7 +1,7 @@
 {
   "name": "@open-template-hub/app-generator",
   "description": "Express Generator CLI for Application Templates on Open Template Hub",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/index.js",
   "preferGlobal": true,
   "scripts": {
@@ -9,7 +9,7 @@
     "build": "tsc"
   },
   "bin": {
-    "open-template-hub-server-generator": "./dist/index.js"
+    "open-template-hub-app-generator": "./dist/index.js"
   },
   "keywords": [
     "Express generator",
