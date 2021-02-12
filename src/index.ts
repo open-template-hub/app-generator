@@ -89,6 +89,7 @@ const updateProjectName = (
 ) => {
   let existingProjectName = '';
   let existingPackageName = '';
+
   shell.cd(targetPath);
 
   switch (templateType) {
