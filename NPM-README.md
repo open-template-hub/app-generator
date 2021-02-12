@@ -15,7 +15,7 @@ Open Template Hub - Application Generator
 This CLI helps you to create an application via Open Template Hub.
 
 Available application types are:
-* [Web Application](https://github.com/open-template-hub/basic-angular-ui-template)
+* [Web Application](https://github.com/open-template-hub/web-ui-template)
 * [Mobile Application](https://github.com/open-template-hub/mobile-ui-template) 
 
 ## About the NPM Package
