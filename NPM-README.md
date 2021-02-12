@@ -19,6 +19,7 @@ Available application types are:
 * [Mobile Application](https://github.com/open-template-hub/mobile-ui-template) 
 
 ## About the NPM Package
+
 ### Package Installation
 ```sh
 npm install -g @open-template-hub/app-generator
