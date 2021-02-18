@@ -16,27 +16,34 @@ Open Template Hub - Application Generator
 This CLI helps you to create an application via Open Template Hub.
 
 Available application types are:
+
 * [Web Application](https://github.com/open-template-hub/web-ui-template)
-* [Mobile Application](https://github.com/open-template-hub/mobile-ui-template) 
+* [Mobile Application](https://github.com/open-template-hub/mobile-ui-template)
 
 ## About the NPM Package
 
 ### Package Installation
+
 ```sh
 npm install -g @open-template-hub/app-generator
 ```
 
 ### Package Usage
+
 Go to the directory on terminal where you want to generate the project.
+
 ```sh
 $ cd PATH
 ```
+
 and run the generator command:
+
 ```sh
 $ open-template-hub-app-generator
 ```
 
 # Sponsors
+
 No sponsors yet! **Will you be the first?**
 
 ## Contributors

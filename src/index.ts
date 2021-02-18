@@ -4,21 +4,15 @@
  * @description holds the project generator
  */
 
-import * as inquirer from 'inquirer';
-import * as fs from 'fs';
-import * as path from 'path';
-import * as shell from 'shelljs';
 import chalk from 'chalk';
-import yargs from 'yargs';
+import * as fs from 'fs';
+import * as inquirer from 'inquirer';
 import { ncp } from 'ncp';
+import * as path from 'path';
 import rmdir from 'rimraf';
-import {
-  TemplateType,
-  BRANCH_NAME,
-  ProjectName,
-  TEMPLATE_HUB_URL,
-  PackageName,
-} from './constant';
+import * as shell from 'shelljs';
+import yargs from 'yargs';
+import { BRANCH_NAME, PackageName, ProjectName, TEMPLATE_HUB_URL, TemplateType, } from './constant';
 
 // Questions
 const QUESTIONS = [
@@ -26,12 +20,12 @@ const QUESTIONS = [
     name: 'template',
     type: 'input',
     message:
-      '1) Web Application \n' +
-      '  2) Mobile Application \n' +
-      '  Please enter the application type you want to generate: ',
-    when: () => !yargs.argv['template'],
-    validate: (input: string) => {
-      if (/^[1 | 2]$/.test(input)) return true;
+        '1) Web Application \n' +
+        '  2) Mobile Application \n' +
+        '  Please enter the application type you want to generate: ',
+    when: () => !yargs.argv[ 'template' ],
+    validate: ( input: string ) => {
+      if ( /^[1 | 2]$/.test( input ) ) return true;
       else
         return 'Please enter correct application type. Application type can be 1 or 2.';
     },
@@ -40,9 +34,9 @@ const QUESTIONS = [
     name: 'name',
     type: 'input',
     message: 'Project name: ',
-    when: () => !yargs.argv['template'],
-    validate: (input: string) => {
-      if (/^([A-Za-z\-\_\d])+$/.test(input)) return true;
+    when: () => !yargs.argv[ 'template' ],
+    validate: ( input: string ) => {
+      if ( /^([A-Za-z\-\_\d])+$/.test( input ) ) return true;
       else
         return 'Project name may only include letters, numbers, underscores and hashes.';
     },
@@ -53,46 +47,46 @@ const QUESTIONS = [
 const CURR_DIR = process.cwd();
 
 // prompts questions to user
-inquirer.prompt(QUESTIONS).then((answers) => {
-  let userAnswers = Object.assign({}, answers, yargs.argv);
+inquirer.prompt( QUESTIONS ).then( ( answers ) => {
+  let userAnswers = Object.assign( {}, answers, yargs.argv );
 
-  const projectName = userAnswers['name'];
-  const targetPath = path.join(CURR_DIR, projectName);
+  const projectName = userAnswers[ 'name' ];
+  const targetPath = path.join( CURR_DIR, projectName );
 
-  if (!createProject(targetPath)) {
+  if ( !createProject( targetPath ) ) {
     return;
   }
 
-  const templateType = userAnswers['template'];
+  const templateType = userAnswers[ 'template' ];
 
-  if (!cloneTemplate(targetPath, templateType)) {
-    console.log(chalk.red('Can not clone the selected template.'));
+  if ( !cloneTemplate( targetPath, templateType ) ) {
+    console.log( chalk.red( 'Can not clone the selected template.' ) );
     return;
   }
 
-  if (!updateProjectName(targetPath, templateType, projectName)) {
-    console.log(chalk.red('Can not set the project name.'));
+  if ( !updateProjectName( targetPath, templateType, projectName ) ) {
+    console.log( chalk.red( 'Can not set the project name.' ) );
     return;
   }
 
-  if (!postProcessNode(targetPath)) {
+  if ( !postProcessNode( targetPath ) ) {
     return;
   }
 
-  showMessage(projectName);
-});
+  showMessage( projectName );
+} );
 
 const updateProjectName = (
-  targetPath: string,
-  templateType: string,
-  projectName: string
+    targetPath: string,
+    templateType: string,
+    projectName: string
 ) => {
   let existingProjectName = '';
   let existingPackageName = '';
 
-  shell.cd(targetPath);
+  shell.cd( targetPath );
 
-  switch (templateType) {
+  switch ( templateType ) {
     case TemplateType.WebUI:
       existingProjectName = ProjectName.WebUI;
       existingPackageName = PackageName.WebUI;
@@ -103,67 +97,67 @@ const updateProjectName = (
       break;
   }
 
-  let oldPath = path.join(targetPath, existingProjectName);
+  let oldPath = path.join( targetPath, existingProjectName );
 
-  ncp(oldPath, targetPath, function (err) {
-    if (err) {
-      return console.log(err);
+  ncp( oldPath, targetPath, function ( err ) {
+    if ( err ) {
+      return console.log( err );
     } else {
-      rmdir(oldPath, (errRmDir: any) => {
-        if (errRmDir) {
-          return console.log(errRmDir);
+      rmdir( oldPath, ( errRmDir: any ) => {
+        if ( errRmDir ) {
+          return console.log( errRmDir );
         } else {
-          let packageFile = path.join(targetPath, 'package.json');
+          let packageFile = path.join( targetPath, 'package.json' );
 
-          fs.readFile(packageFile, 'utf8', function (errReadFile, data) {
-            if (errReadFile) {
-              return console.log(errReadFile);
+          fs.readFile( packageFile, 'utf8', function ( errReadFile, data ) {
+            if ( errReadFile ) {
+              return console.log( errReadFile );
             }
-            var result = data.replace(existingPackageName, projectName);
+            var result = data.replace( existingPackageName, projectName );
 
-            fs.writeFile(packageFile, result, 'utf8', function (errWriteFile) {
-              if (errWriteFile) return console.log(errWriteFile);
-            });
-          });
-          const gitFolderPath = path.join(targetPath, '.git');
-          rmdir(gitFolderPath, (errRmDirInner: any) => {
-            if (errRmDirInner) {
-              return console.log(errRmDirInner);
+            fs.writeFile( packageFile, result, 'utf8', function ( errWriteFile ) {
+              if ( errWriteFile ) return console.log( errWriteFile );
+            } );
+          } );
+          const gitFolderPath = path.join( targetPath, '.git' );
+          rmdir( gitFolderPath, ( errRmDirInner: any ) => {
+            if ( errRmDirInner ) {
+              return console.log( errRmDirInner );
             }
-          });
+          } );
         }
-      });
+      } );
     }
-  });
+  } );
 
   return true;
 };
 
-const cloneTemplate = (targetPath: string, templateType: string) => {
-  shell.cd(targetPath);
+const cloneTemplate = ( targetPath: string, templateType: string ) => {
+  shell.cd( targetPath );
 
   let cmd = '';
   let clone = 'git clone -b ';
 
-  switch (templateType) {
+  switch ( templateType ) {
     case TemplateType.WebUI:
       cmd =
-        clone + BRANCH_NAME + ' ' + TEMPLATE_HUB_URL + '/' + ProjectName.WebUI;
+          clone + BRANCH_NAME + ' ' + TEMPLATE_HUB_URL + '/' + ProjectName.WebUI;
       break;
     case TemplateType.MobileUI:
       cmd =
-        clone +
-        BRANCH_NAME +
-        ' ' +
-        TEMPLATE_HUB_URL +
-        '/' +
-        ProjectName.MobileUI;
+          clone +
+          BRANCH_NAME +
+          ' ' +
+          TEMPLATE_HUB_URL +
+          '/' +
+          ProjectName.MobileUI;
       break;
   }
-  console.log('command: ', cmd);
-  const result = shell.exec(cmd);
+  console.log( 'command: ', cmd );
+  const result = shell.exec( cmd );
 
-  if (result.code !== 0) {
+  if ( result.code !== 0 ) {
     return false;
   }
 
@@ -174,10 +168,10 @@ const cloneTemplate = (targetPath: string, templateType: string) => {
  * shows message to user
  * @param projectName project name
  */
-const showMessage = (projectName: string) => {
-  console.log('');
-  console.log(chalk.green('Done.'));
-  console.log(chalk.green(`Go into the project: cd ${projectName}`));
+const showMessage = ( projectName: string ) => {
+  console.log( '' );
+  console.log( chalk.green( 'Done.' ) );
+  console.log( chalk.green( `Go into the project: cd ${ projectName }` ) );
 };
 
 /**
@@ -185,15 +179,15 @@ const showMessage = (projectName: string) => {
  * @param projectPath project path
  * @returns true if folder does not already exist
  */
-const createProject = (projectPath: string) => {
-  if (fs.existsSync(projectPath)) {
+const createProject = ( projectPath: string ) => {
+  if ( fs.existsSync( projectPath ) ) {
     console.log(
-      chalk.red(`Folder ${projectPath} exists. Delete or use another name.`)
+        chalk.red( `Folder ${ projectPath } exists. Delete or use another name.` )
     );
     return false;
   }
 
-  fs.mkdirSync(projectPath);
+  fs.mkdirSync( projectPath );
   return true;
 };
 
@@ -202,25 +196,25 @@ const createProject = (projectPath: string) => {
  * npm install etc.
  * @param targetPath target path
  */
-const postProcessNode = (targetPath: string) => {
-  shell.cd(targetPath);
+const postProcessNode = ( targetPath: string ) => {
+  shell.cd( targetPath );
 
   let cmd = '';
 
-  if (shell.which('yarn')) {
+  if ( shell.which( 'yarn' ) ) {
     cmd = 'yarn';
-  } else if (shell.which('npm')) {
+  } else if ( shell.which( 'npm' ) ) {
     cmd = 'npm install';
   }
 
-  if (cmd) {
-    const result = shell.exec(cmd);
+  if ( cmd ) {
+    const result = shell.exec( cmd );
 
-    if (result.code !== 0) {
+    if ( result.code !== 0 ) {
       return false;
     }
   } else {
-    console.log(chalk.red('No yarn or npm found. Cannot run installation.'));
+    console.log( chalk.red( 'No yarn or npm found. Cannot run installation.' ) );
   }
 
   return true;
