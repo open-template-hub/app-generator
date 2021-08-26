@@ -45,7 +45,7 @@ $ cd PATH
 and run the generator command:
 
 ```sh
-$ @open-template-hub/app-generator
+$ open-template-hub-app-generator
 ```
 
 # Sponsors
