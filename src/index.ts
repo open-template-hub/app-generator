@@ -61,12 +61,12 @@ inquirer.prompt( QUESTIONS ).then( ( answers ) => {
   const templateType = userAnswers[ 'template' ];
 
   if ( !cloneTemplate( targetPath, templateType ) ) {
-    console.log( chalk.red( 'Can not clone the selected template.' ) );
+    console.error( chalk.red( 'Can not clone the selected template.' ) );
     return;
   }
 
   if ( !updateProjectName( targetPath, templateType, projectName ) ) {
-    console.log( chalk.red( 'Can not set the project name.' ) );
+    console.error( chalk.red( 'Can not set the project name.' ) );
     return;
   }
 
@@ -77,62 +77,80 @@ inquirer.prompt( QUESTIONS ).then( ( answers ) => {
   showMessage( projectName );
 } );
 
+interface RepoConfig {
+  projectName: string,
+  packageName: string
+}
+
+function updatePackageJson( targetPath: string, repoConfig: RepoConfig, projectName: string ) {
+  let packageFile = path.join( targetPath, 'package.json' );
+
+  fs.readFile( packageFile, 'utf8', function ( errReadFile, data ) {
+    if ( errReadFile ) {
+      return console.error( errReadFile );
+    }
+
+    let result = data.replace( repoConfig.packageName, projectName );
+
+    fs.writeFile( packageFile, result, 'utf8', function ( errWriteFile ) {
+      if ( errWriteFile ) {
+        return console.error( errWriteFile );
+      }
+    } );
+  } );
+}
+
 const updateProjectName = (
     targetPath: string,
     templateType: string,
     projectName: string
 ) => {
-  let existingProjectName = '';
-  let existingPackageName = '';
+
+  let repoConfig: RepoConfig = {
+    packageName: '',
+    projectName: ''
+  };
 
   shell.cd( targetPath );
 
   switch ( templateType ) {
     case TemplateType.WebUI:
-      existingProjectName = ProjectName.WebUI;
-      existingPackageName = PackageName.WebUI;
+      repoConfig.projectName = ProjectName.WebUI;
+      repoConfig.packageName = PackageName.WebUI;
       break;
     case TemplateType.MobileUI:
-      existingProjectName = ProjectName.MobileUI;
-      existingPackageName = PackageName.MobileUI;
+      repoConfig.projectName = ProjectName.MobileUI;
+      repoConfig.packageName = PackageName.MobileUI;
       break;
     case TemplateType.CompanyProfileUI:
-      existingProjectName = ProjectName.CompanyProfileUI;
-      existingPackageName = PackageName.CompanyProfileUI;
+      repoConfig.projectName = ProjectName.CompanyProfileUI;
+      repoConfig.packageName = PackageName.CompanyProfileUI;
       break;
   }
 
-  let oldPath = path.join( targetPath, existingProjectName );
+  let oldPath = path.join( targetPath, repoConfig.projectName );
 
   ncp( oldPath, targetPath, function ( err ) {
+
     if ( err ) {
-      return console.log( err );
-    } else {
-      rmdir( oldPath, ( errRmDir: any ) => {
-        if ( errRmDir ) {
-          return console.log( errRmDir );
-        } else {
-          let packageFile = path.join( targetPath, 'package.json' );
+      return console.error( err );
+    }
 
-          fs.readFile( packageFile, 'utf8', function ( errReadFile, data ) {
-            if ( errReadFile ) {
-              return console.log( errReadFile );
-            }
-            var result = data.replace( existingPackageName, projectName );
+    rmdir( oldPath, ( errRmDir: any ) => {
+      if ( errRmDir ) {
+        return console.error( errRmDir );
+      }
+      updatePackageJson( targetPath, repoConfig, projectName );
 
-            fs.writeFile( packageFile, result, 'utf8', function ( errWriteFile ) {
-              if ( errWriteFile ) return console.log( errWriteFile );
-            } );
-          } );
-          const gitFolderPath = path.join( targetPath, '.git' );
-          rmdir( gitFolderPath, ( errRmDirInner: any ) => {
-            if ( errRmDirInner ) {
-              return console.log( errRmDirInner );
-            }
-          } );
+      const gitFolderPath = path.join( targetPath, '.git' );
+
+      rmdir( gitFolderPath, ( errRmDirInner: any ) => {
+
+        if ( errRmDirInner ) {
+          return console.error( errRmDirInner );
         }
       } );
-    }
+    } );
   } );
 
   return true;
@@ -185,7 +203,7 @@ const showMessage = ( projectName: string ) => {
  */
 const createProject = ( projectPath: string ) => {
   if ( fs.existsSync( projectPath ) ) {
-    console.log(
+    console.error(
         chalk.red( `Folder ${ projectPath } exists. Delete or use another name.` )
     );
     return false;
@@ -218,7 +236,7 @@ const postProcessNode = ( targetPath: string ) => {
       return false;
     }
   } else {
-    console.log( chalk.red( 'No yarn or npm found. Cannot run installation.' ) );
+    console.error( chalk.red( 'No yarn or npm found. Cannot run installation.' ) );
   }
 
   return true;
