@@ -20,14 +20,15 @@ const QUESTIONS = [
     name: 'template',
     type: 'input',
     message:
-        '1) Web Application \n' +
+        '1) Web UI \n' +
         '  2) Mobile Application \n' +
+        '  3) Company Profile UI \n' +
         '  Please enter the application type you want to generate: ',
     when: () => !yargs.argv[ 'template' ],
     validate: ( input: string ) => {
-      if ( /^[1 | 2]$/.test( input ) ) return true;
+      if ( /^[1 | 2| 3]$/.test( input ) ) return true;
       else
-        return 'Please enter correct application type. Application type can be 1 or 2.';
+        return 'Please enter correct application type. Application type can be 1, 2 or 3.';
     },
   },
   {
@@ -95,6 +96,10 @@ const updateProjectName = (
       existingProjectName = ProjectName.MobileUI;
       existingPackageName = PackageName.MobileUI;
       break;
+    case TemplateType.CompanyProfileUI:
+      existingProjectName = ProjectName.CompanyProfileUI;
+      existingPackageName = PackageName.CompanyProfileUI;
+      break;
   }
 
   let oldPath = path.join( targetPath, existingProjectName );
@@ -146,12 +151,11 @@ const cloneTemplate = ( targetPath: string, templateType: string ) => {
       break;
     case TemplateType.MobileUI:
       cmd =
-          clone +
-          BRANCH_NAME +
-          ' ' +
-          TEMPLATE_HUB_URL +
-          '/' +
-          ProjectName.MobileUI;
+          clone + BRANCH_NAME + ' ' + TEMPLATE_HUB_URL + '/' + ProjectName.MobileUI;
+      break;
+    case TemplateType.CompanyProfileUI:
+      cmd =
+          clone + BRANCH_NAME + ' ' + TEMPLATE_HUB_URL + '/' + ProjectName.CompanyProfileUI;
       break;
   }
   console.log( 'command: ', cmd );
