@@ -5,19 +5,20 @@
 </p>
 
 <h1 align="center">
-Open Template Hub - Application Generator
+Open Template Hub - UI Generator v2
 </h1>
 
 [![GitHubRepo](https://img.shields.io/badge/GitHub-Repository-24292e.svg?style=for-the-badge&logo=github)](https://github.com/open-template-hub/app-generator)
 [![SonarCloud](https://img.shields.io/sonar/quality_gate/open-template-hub_app-generator?server=https%3A%2F%2Fsonarcloud.io&label=Sonar%20Cloud&style=for-the-badge&logo=sonarcloud)](https://sonarcloud.io/dashboard?id=open-template-hub_app-generator)
 [![BTC](https://img.shields.io/badge/Donate-BTC-ORANGE?color=F5922F&style=for-the-badge&logo=bitcoin)](https://commerce.coinbase.com/checkout/8313af5f-de48-498d-b2cb-d98819ca7d5e)
 
-This CLI helps you to create an application via Open Template Hub.
+CLI UI generator of UI Templates on [Open Template Hub](https://github.com/open-template-hub)
 
-Available application types are:
+Available UI types are:
 
-* [Web Application](https://github.com/open-template-hub/web-ui-template)
+* [Web UI](https://github.com/open-template-hub/web-ui-template)
 * [Mobile Application](https://github.com/open-template-hub/mobile-ui-template)
+* [Company Profile UI](https://github.com/open-template-hub/company-profile-ui-template)
 
 ## About the NPM Package
 
@@ -38,7 +39,7 @@ $ cd PATH
 and run the generator command:
 
 ```sh
-$ open-template-hub-app-generator
+$ @open-template-hub/app-generator
 ```
 
 # Sponsors
@@ -71,4 +72,4 @@ No sponsors yet! **Will you be the first?**
 
 ## LICENSE
 
-The source code for this project is released under the [MIT License](https://github.com/open-template-hub/app-generator/blob/develop/LICENSE).
+The source code for this project is released under the [MIT License](LICENSE).
