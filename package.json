@@ -1,7 +1,7 @@
 {
   "name": "@open-template-hub/app-generator",
   "description": "CLI UI generator of UI Templates on Open Template Hub",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "license": "MIT",
   "preferGlobal": true,
   "main": "dist/index.js",
