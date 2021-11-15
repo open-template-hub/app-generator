@@ -16,7 +16,7 @@ Following packages are not updated in the develop branch yet. So, if you want to
 | Package            | Current     | Wanted    | Latest   | Location |
 | --- | --- | --- | --- | --- |
 | @types/inquirer    |  0.0.43     | 0.0.43    |  8.1.3   | @open-template-hub/app-generator |
-| @types/node      1 | 0.17.60  10 | .17.60  1 | 6.11.6   | @open-template-hub/app-generator |
+| @types/node      1 | 0.17.60  10 | .17.60  1 | 6.11.7   | @open-template-hub/app-generator |
 | @types/yargs       |  11.1.8     | 11.1.8    | 17.0.5   | @open-template-hub/app-generator |
 | inquirer           |   6.5.2     |  6.5.2    |  8.2.0   | @open-template-hub/app-generator |
 | ts-node            |   7.0.1     |  7.0.1    | 10.4.0   | @open-template-hub/app-generator |
