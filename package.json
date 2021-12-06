@@ -1,6 +1,6 @@
 {
   "name": "@open-template-hub/app-generator",
-  "description": "CLI UI generator of UI Templates on Open Template Hub",
+  "description": "Command-line interface generator of the user interfaces at Open Template Hub",
   "version": "3.0.1",
   "license": "MIT",
   "preferGlobal": true,
