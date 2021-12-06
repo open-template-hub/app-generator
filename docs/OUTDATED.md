@@ -16,13 +16,13 @@ Following packages are not updated in the develop branch yet. So, if you want to
 | Package            | Current     | Wanted     | Latest   | Location |
 | --- | --- | --- | --- | --- |
 | @types/inquirer    |  0.0.43     | 0.0.43     |  8.1.3   | @open-template-hub/app-generator |
-| @types/node      1 | 0.17.60  10 | .17.60  16 | .11.10   | @open-template-hub/app-generator |
+| @types/node      1 | 0.17.60  10 | .17.60  16 | .11.11   | @open-template-hub/app-generator |
 | @types/yargs       |  11.1.8     | 11.1.8     | 17.0.7   | @open-template-hub/app-generator |
 | chalk              |   4.1.2     |  4.1.2     |  5.0.0   | @open-template-hub/app-generator |
 | inquirer           |   6.5.2     |  6.5.2     |  8.2.0   | @open-template-hub/app-generator |
 | ts-node            |   7.0.1     |  7.0.1     | 10.4.0   | @open-template-hub/app-generator |
 | typescript         |  3.9.10     | 3.9.10     |  4.5.2   | @open-template-hub/app-generator |
-| yargs              |  12.0.5     | 12.0.5     | 17.2.1   | @open-template-hub/app-generator |
+| yargs              |  12.0.5     | 12.0.5     | 17.3.0   | @open-template-hub/app-generator |
 
 <table align="right"><tr><td><a href="https://opentemplatehub.com"><img src="https://raw.githubusercontent.com/open-template-hub/open-template-hub.github.io/master/assets/logo/brand-logo.png" width="50px" alt="oth"/></a></td><td><b>Open Template Hub © 2021</b></td></tr></table>
 
