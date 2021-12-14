@@ -6,7 +6,7 @@
 
 
 <h1 align="center">
-Open Template Hub - UI Generator v3
+Open Template Hub - UI Generator v4
   <br/>
 (outdated packages)
 </h1>
