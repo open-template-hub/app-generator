@@ -160,7 +160,7 @@ const cloneTemplate = ( targetPath: string, templateType: string ) => {
   shell.cd( targetPath );
 
   let cmd = '';
-  let clone = 'git clone -b ';
+  let clone = 'git clone --progress -b ';
 
   switch ( templateType ) {
     case TemplateType.WebUI:
@@ -176,6 +176,7 @@ const cloneTemplate = ( targetPath: string, templateType: string ) => {
           clone + BRANCH_NAME + ' ' + TEMPLATE_HUB_URL + '/' + ProjectName.CompanyProfileUI;
       break;
   }
+  
   console.log( 'command: ', cmd );
   const result = shell.exec( cmd );
 
