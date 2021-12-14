@@ -4,14 +4,14 @@
  * @description holds the project generator
  */
 
-import chalk from 'chalk';
+import colors from 'colors';
 import * as fs from 'fs';
 import * as inquirer from 'inquirer';
 import { ncp } from 'ncp';
 import * as path from 'path';
 import rmdir from 'rimraf';
 import * as shell from 'shelljs';
-import yargs from 'yargs';
+import yargs from 'yargs/yargs';
 import { BRANCH_NAME, PackageName, ProjectName, TEMPLATE_HUB_URL, TemplateType, } from './constant';
 
 // Questions
@@ -24,7 +24,7 @@ const QUESTIONS = [
         '  2) Mobile Application \n' +
         '  3) Company Profile UI \n' +
         '  Please enter the application type you want to generate: ',
-    when: () => !yargs.argv[ 'template' ],
+    when: () => yargs().argv,
     validate: ( input: string ) => {
       if ( /^[1 | 2| 3]$/.test( input ) ) return true;
       else
@@ -35,7 +35,7 @@ const QUESTIONS = [
     name: 'name',
     type: 'input',
     message: 'Project name: ',
-    when: () => !yargs.argv[ 'template' ],
+    when: () => yargs().argv,
     validate: ( input: string ) => {
       if ( /^([A-Za-z\-\_\d])+$/.test( input ) ) return true;
       else
@@ -49,7 +49,7 @@ const CURR_DIR = process.cwd();
 
 // prompts questions to user
 inquirer.prompt( QUESTIONS ).then( ( answers ) => {
-  let userAnswers = Object.assign( {}, answers, yargs.argv );
+  let userAnswers = Object.assign( {}, answers, yargs().argv );
 
   const projectName = userAnswers[ 'name' ];
   const targetPath = path.join( CURR_DIR, projectName );
@@ -61,12 +61,12 @@ inquirer.prompt( QUESTIONS ).then( ( answers ) => {
   const templateType = userAnswers[ 'template' ];
 
   if ( !cloneTemplate( targetPath, templateType ) ) {
-    console.error( chalk.red( 'Can not clone the selected template.' ) );
+    console.error( colors.red( 'Can not clone the selected template.' ) );
     return;
   }
 
   if ( !updateProjectName( targetPath, templateType, projectName ) ) {
-    console.error( chalk.red( 'Can not set the project name.' ) );
+    console.error( colors.red( 'Can not set the project name.' ) );
     return;
   }
 
@@ -192,8 +192,8 @@ const cloneTemplate = ( targetPath: string, templateType: string ) => {
  */
 const showMessage = ( projectName: string ) => {
   console.log( '' );
-  console.log( chalk.green( 'Done.' ) );
-  console.log( chalk.green( `Go into the project: cd ${ projectName }` ) );
+  console.log( colors.green( 'Done.' ) );
+  console.log( colors.green( `Go into the project: cd ${ projectName }` ) );
 };
 
 /**
@@ -204,7 +204,7 @@ const showMessage = ( projectName: string ) => {
 const createProject = ( projectPath: string ) => {
   if ( fs.existsSync( projectPath ) ) {
     console.error(
-        chalk.red( `Folder ${ projectPath } exists. Delete or use another name.` )
+        colors.red( `Folder ${ projectPath } exists. Delete or use another name.` )
     );
     return false;
   }
@@ -236,7 +236,7 @@ const postProcessNode = ( targetPath: string ) => {
       return false;
     }
   } else {
-    console.error( chalk.red( 'No yarn or npm found. Cannot run installation.' ) );
+    console.error( colors.red( 'No yarn or npm found. Cannot run installation.' ) );
   }
 
   return true;
