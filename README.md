@@ -5,7 +5,7 @@
 </p>
 
 <h1 align="center">
-Open Template Hub - UI Generator v2
+Open Template Hub - UI Generator v4
 </h1>
 
 [![Version](https://img.shields.io/npm/v/@open-template-hub/app-generator?color=CB3837&style=for-the-badge&logo=npm)](https://www.npmjs.com/package/@open-template-hub/app-generator)
@@ -16,9 +16,8 @@ Open Template Hub - UI Generator v2
 [![LastCommit](https://img.shields.io/github/last-commit/open-template-hub/app-generator?color=43b043&style=for-the-badge)](https://github.com/open-template-hub/app-generator/commits/master)
 [![Release](https://img.shields.io/github/release/open-template-hub/app-generator?include_prereleases&color=43b043&style=for-the-badge)](https://github.com/open-template-hub/app-generator/releases)
 [![SonarCloud](https://img.shields.io/sonar/quality_gate/open-template-hub_app-generator?server=https%3A%2F%2Fsonarcloud.io&label=Sonar%20Cloud&style=for-the-badge&logo=sonarcloud)](https://sonarcloud.io/dashboard?id=open-template-hub_app-generator)
-[![BTC](https://img.shields.io/badge/Donate-BTC-ORANGE?color=F5922F&style=for-the-badge&logo=bitcoin)](https://commerce.coinbase.com/checkout/8313af5f-de48-498d-b2cb-d98819ca7d5e)
 
-Command line interface generator of the user interfaces at [Open Template Hub](https://github.com/open-template-hub)
+Command-line interface generator of the user interfaces at [Open Template Hub](https://github.com/open-template-hub)
 
 Available UI types are:
 
