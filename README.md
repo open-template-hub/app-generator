@@ -21,9 +21,43 @@ Command-line interface generator of the user interfaces at [Open Template Hub](h
 
 Available UI types are:
 
-* [Web UI](https://github.com/open-template-hub/web-ui-template)
-* [Mobile Application](https://github.com/open-template-hub/mobile-ui-template)
-* [Company Profile UI](https://github.com/open-template-hub/company-profile-ui-template)
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/open-template-hub/web-ui-template">
+        <img src="https://raw.githubusercontent.com/open-template-hub/open-template-hub.github.io/master/assets/logo/ui/web-ui-logo.png" width="100px;" alt=""/>
+        <br />
+        <sub>
+          <b>
+            Web UI
+          </b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/open-template-hub/mobile-ui-template">
+        <img src="https://raw.githubusercontent.com/open-template-hub/open-template-hub.github.io/master/assets/logo/ui/mobile-ui-logo.png" width="100px;" alt=""/>
+        <br />
+        <sub>
+          <b>
+            Mobile UI
+          </b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/open-template-hub/company-profile-ui-template">
+        <img src="https://raw.githubusercontent.com/open-template-hub/open-template-hub.github.io/master/assets/logo/ui/web-ui-logo.png" width="100px;" alt=""/>
+        <br />
+        <sub>
+          <b>
+            Company Profile UI
+          </b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
 
 ## About the NPM Package
 
