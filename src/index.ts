@@ -23,12 +23,13 @@ const QUESTIONS = [
         '1) Web UI \n' +
         '  2) Mobile Application \n' +
         '  3) Company Profile UI \n' +
+        '  4) Admin UI \n' +
         '  Please enter the application type you want to generate: ',
     when: () => yargs().argv,
     validate: ( input: string ) => {
-      if ( /^[1 | 2| 3]$/.test( input ) ) return true;
+      if ( /^[1 | 2| 3| 4]$/.test( input ) ) return true;
       else
-        return 'Please enter correct application type. Application type can be 1, 2 or 3.';
+        return 'Please enter correct application type. Application type can be 1, 2, 3 or 4.';
     },
   },
   {
@@ -126,6 +127,10 @@ const updateProjectName = (
       repoConfig.projectName = ProjectName.CompanyProfileUI;
       repoConfig.packageName = PackageName.CompanyProfileUI;
       break;
+    case TemplateType.AdminUI:
+      repoConfig.projectName = ProjectName.AdminUI;
+      repoConfig.packageName = PackageName.AdminUI;
+      break;
   }
 
   let oldPath = path.join( targetPath, repoConfig.projectName );
@@ -175,16 +180,16 @@ const cloneTemplate = ( targetPath: string, templateType: string ) => {
       cmd =
           clone + BRANCH_NAME + ' ' + TEMPLATE_HUB_URL + '/' + ProjectName.CompanyProfileUI;
       break;
+    case TemplateType.AdminUI:
+      cmd =
+          clone + BRANCH_NAME + ' ' + TEMPLATE_HUB_URL + '/' + ProjectName.AdminUI;
+      break;
   }
-  
+
   console.log( 'command: ', cmd );
   const result = shell.exec( cmd );
 
-  if ( result.code !== 0 ) {
-    return false;
-  }
-
-  return true;
+  return result.code === 0;
 };
 
 /**

@@ -62,7 +62,7 @@ Available UI types are:
         <br />
         <sub>
           <b>
-            Admin UI (Coming Soon)
+            Admin UI
           </b>
         </sub>
       </a>
