@@ -27,7 +27,7 @@ const QUESTIONS = [
         '  Please enter the application type you want to generate: ',
     when: () => yargs().argv,
     validate: ( input: string ) => {
-      if ( /^[1 | 2| 3| 4]$/.test( input ) ) return true;
+      if ( /^[1-4]$/.test( input ) ) return true;
       else
         return 'Please enter correct application type. Application type can be 1, 2, 3 or 4.';
     },
